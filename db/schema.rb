@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_14_184559) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_190807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_184559) do
     t.index ["requested_user_id"], name: "index_relationships_on_requested_user_id"
     t.index ["requesting_user_id", "requested_user_id"], name: "unique_relationship_id", unique: true
     t.index ["requesting_user_id"], name: "index_relationships_on_requesting_user_id"
+  end
+
+  create_table "testings", force: :cascade do |t|
+    t.bigint "disease_id"
+    t.bigint "user_id", null: false
+    t.string "notes"
+    t.string "status", null: false
+    t.string "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disease_id"], name: "index_testings_on_disease_id"
+    t.index ["user_id"], name: "index_testings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
